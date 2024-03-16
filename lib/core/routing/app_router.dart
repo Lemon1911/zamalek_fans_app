@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:zamalek_fans_app/core/routing/routes.dart';
+import 'package:zamalek_fans_app/features/login/presentation/screens/login_screen.dart';
+import 'package:zamalek_fans_app/features/onboarding/presentation/screens/onboarding_screen.dart';
 
 class AppRouter {
-  Object generateRoute(RouteSettings settings) {
+  Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => const Placeholder(),
+          builder: (_) => const OnboardingScreen(),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => const Placeholder(),
+          builder: (_) => const LoginScreen(),
         );
       default:
         return MaterialPageRoute(
