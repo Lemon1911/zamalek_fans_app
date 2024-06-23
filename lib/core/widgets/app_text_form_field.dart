@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zamalek_fans_app/core/theming/colors.dart';
 
 class AppTextFormField extends StatelessWidget {
   const AppTextFormField({
@@ -38,7 +39,7 @@ class AppTextFormField extends StatelessWidget {
         focusedBorder: focusBorder ??
             OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Colors.red,
+                color: ColorsManager.lightRed3,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(
@@ -59,18 +60,18 @@ class AppTextFormField extends StatelessWidget {
             const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 12,
-              color: Colors.blue,
+              color: ColorsManager.lightRed3,
             ),
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? Colors.white.withOpacity(0.5),
+        fillColor: backgroundColor ?? Colors.white,
         filled: true,
       ),
       obscureText: isObscureText ?? false,
       style: const TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 19,
-        color: Colors.blue,
+        color: ColorsManager.lightRed3,
       ),
     );
   }

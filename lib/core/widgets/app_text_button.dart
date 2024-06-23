@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zamalek_fans_app/core/theming/colors.dart';
 
 class AppTextButton extends StatelessWidget {
   const AppTextButton({
@@ -37,7 +38,7 @@ class AppTextButton extends StatelessWidget {
           ),
         ),
         backgroundColor: MaterialStatePropertyAll(
-          backgroundColor ?? Colors.blue,
+          backgroundColor ?? ColorsManager.lightRed3,
         ),
         padding: MaterialStateProperty.all<EdgeInsets>(
           EdgeInsets.symmetric(

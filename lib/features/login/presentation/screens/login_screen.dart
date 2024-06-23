@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zamalek_fans_app/core/theming/colors.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
 
@@ -25,8 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image:
-                      AssetImage("assets/images/zamalek_background_photo.png"),
+                  image: AssetImage("assets/images/new_logo.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -37,24 +37,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image(
-                      image: AssetImage(
-                        "assets/images/zamalek_word_logo.png",
+                    Container(
+                      child: Image(
+                        image: AssetImage(
+                          "assets/images/0100.png",
+                        ),
                       ),
-                      height: 300.h,
+                      height: 200.h,
                     ),
+                    SizedBox(height: 20.h),
                     Form(
                       key: formKey,
                       child: Column(
                         children: [
                           AppTextFormField(
                             hintText: "Email",
+                            backgroundColor:
+                                ColorsManager.mainWhite.withOpacity(0.5),
                           ),
                           SizedBox(
                             height: 20.h,
                           ),
                           AppTextFormField(
                             hintText: "Password",
+                            backgroundColor:
+                                ColorsManager.mainWhite.withOpacity(0.5),
                             isObscureText: isObscureText,
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -63,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               },
                               child: Icon(
+                                color: Colors.blueGrey,
                                 isObscureText
                                     ? Icons.visibility_off
                                     : Icons.visibility,
@@ -70,24 +78,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 20.h,
+                            height: 25.h,
                           ),
                           Align(
-                            alignment: AlignmentDirectional.centerEnd,
+                            alignment: AlignmentDirectional.centerStart,
                             child: Text(
                               "Forgot Password",
                               style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.blue,
+                                fontSize: 16.sp,
+                                color: Colors.blueGrey[400],
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                           SizedBox(
-                            height: 20.h,
+                            height: 25.h,
                           ),
                           AppTextButton(
                             buttonText: "Login",
+                            backgroundColor:
+                                ColorsManager.lightRed3.withOpacity(0.7),
                             textStyle: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
