@@ -79,79 +79,89 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 image:
                     AssetImage("assets/images/scaffold_background_image.jpg"),
                 fit: BoxFit.cover,
+                opacity: 0.7,
               ),
             ),
           ),
           // Centered content
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Animated text based on current photo index
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
-                  child: Text(
-                    _displayText,
-                    key: ValueKey<int>(_currentPhotoIndex),
-                    style: TextStyle(fontSize: 24.sp),
-                  ),
-                ),
-                SizedBox(height: 16.h),
-                // Container with photos using AnimatedContainer
-                AnimatedContainer(
-                  duration: Duration(seconds: 1),
-                  curve: Curves.easeInOut,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 1.0),
-                    borderRadius: BorderRadius.circular(12.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 30.w,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Animated text based on current photo index
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 500),
+                      child: Text(
+                        _displayText,
+                        key: ValueKey<int>(_currentPhotoIndex),
+                        style: TextStyle(fontSize: 24.sp),
                       ),
-                    ],
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: 3, // Assuming you have 3 photos
-                      itemBuilder: (context, index) {
-                        return Image.asset(
-                          index == 0
-                              ? "assets/images/1.jpg"
-                              : index == 1
-                                  ? "assets/images/2.jpg"
-                                  : "assets/images/3.jpg",
-                          fit: BoxFit.cover,
-                        );
-                      },
                     ),
-                  ),
-                ),
-                SizedBox(height: 16.h),
-                // Clickable text to navigate to the login screen
-                Visibility(
-                  visible: _currentPhotoIndex == 2,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    },
-                    child: AnimatedDefaultTextStyle(
-                      duration: Duration(milliseconds: 1500),
-                      style: TextStyle(fontSize: _textSize, color: Colors.blue),
-                      child: Text('الجمهور'),
+                    SizedBox(height: 16.h),
+                    // Container with photos using AnimatedContainer
+                    AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.easeInOut,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 1.0),
+                        borderRadius: BorderRadius.circular(12.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: PageView.builder(
+                          controller: _pageController,
+                          itemCount: 3, // Assuming you have 3 photos
+                          itemBuilder: (context, index) {
+                            return Image.asset(
+                              index == 0
+                                  ? "assets/images/1.jpg"
+                                  : index == 1
+                                      ? "assets/images/2.jpg"
+                                      : "assets/images/3.jpg",
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 16.h),
+                    // Clickable text to navigate to the login screen
+                    Visibility(
+                      visible: _currentPhotoIndex == 2,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
+                        },
+                        child: AnimatedDefaultTextStyle(
+                          duration: Duration(milliseconds: 1500),
+                          style: TextStyle(
+                              fontSize: _textSize, color: Colors.blue),
+                          child: Text('الجمهور'),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
