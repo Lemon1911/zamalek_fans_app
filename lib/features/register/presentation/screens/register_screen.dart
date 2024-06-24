@@ -3,18 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
+import 'package:zamalek_fans_app/features/register/presentation/widgets/register_icon_widget.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/widgets/app_directional_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreen extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
   bool isObscureText = true;
 
@@ -41,18 +42,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 200.h,
+                      height: 150.h,
                       child: const Image(
                         image: AssetImage(
                           "assets/images/zamalek_arabic_word.png",
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 10.h),
                     Form(
                       key: formKey,
                       child: Column(
                         children: [
+                          AppTextFormField(
+                            hintText: "Name",
+                            backgroundColor:
+                                ColorsManager.mainWhite.withOpacity(0.5),
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
                           AppTextFormField(
                             hintText: "Email",
                             backgroundColor:
@@ -81,16 +90,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 25.h,
+                            height: 20.h,
                           ),
-                          Align(
-                            alignment: AlignmentDirectional.centerStart,
-                            child: Text(
-                              "Forgot Password",
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: Colors.blueGrey[400],
-                                fontWeight: FontWeight.bold,
+                          AppTextFormField(
+                            hintText: "Password",
+                            backgroundColor:
+                                ColorsManager.mainWhite.withOpacity(0.5),
+                            isObscureText: isObscureText,
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isObscureText = !isObscureText;
+                                });
+                              },
+                              child: Icon(
+                                color: Colors.blueGrey,
+                                isObscureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                               ),
                             ),
                           ),
@@ -98,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 25.h,
                           ),
                           AppTextButton(
-                            buttonText: "Login",
+                            buttonText: "Sign up",
                             backgroundColor:
                                 ColorsManager.lightRed3.withOpacity(0.7),
                             textStyle: TextStyle(
@@ -110,6 +127,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      "Or Sign up with",
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 5.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        RegisterIconWidget(
+                          onPressed: () {},
+                          size: 50,
+                          imagePath: "assets/images/facebook.png",
+                        ),
+                        RegisterIconWidget(
+                          onPressed: () {},
+                          size: 40,
+                          imagePath: "assets/images/google.png",
+                        ),
+                      ],
                     ),
                   ],
                 ),

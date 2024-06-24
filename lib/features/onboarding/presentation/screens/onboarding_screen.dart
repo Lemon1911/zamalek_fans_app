@@ -17,7 +17,7 @@ class OnboardingScreen extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/new_logo.png"),
+                  image: AssetImage("assets/images/background_photo.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -32,7 +32,7 @@ class OnboardingScreen extends StatelessWidget {
                       height: 200.h,
                       child: const Image(
                         image: AssetImage(
-                          "assets/images/0100.png",
+                          "assets/images/zamalek_arabic_word.png",
                         ),
                       ),
                     ),
@@ -63,7 +63,9 @@ class OnboardingScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 20.sp,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.registerScreen);
+                      },
                     ),
                   ],
                 ),
