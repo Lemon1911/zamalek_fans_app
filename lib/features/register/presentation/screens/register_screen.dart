@@ -45,7 +45,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                       height: 150.h,
                       child: const Image(
                         image: AssetImage(
-                          "assets/images/zamalek_arabic_word.png",
+                          "assets/images/main_logo.png",
                         ),
                       ),
                     ),

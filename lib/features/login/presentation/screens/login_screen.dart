@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 200.h,
                       child: const Image(
                         image: AssetImage(
-                          "assets/images/zamalek_arabic_word.png",
+                          "assets/images/main_logo.png",
                         ),
                       ),
                     ),

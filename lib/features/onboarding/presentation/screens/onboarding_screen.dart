@@ -29,16 +29,15 @@ class OnboardingScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 200.h,
+                      height: 300.h,
                       child: const Image(
                         image: AssetImage(
-                          "assets/images/zamalek_arabic_word.png",
+                          "assets/images/main_logo.png",
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.h),
                     SizedBox(
-                      height: 80.h,
+                      height: 30.h,
                     ),
                     AppTextButton(
                       buttonText: "Log in",
