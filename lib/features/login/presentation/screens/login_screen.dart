@@ -4,6 +4,9 @@ import 'package:zamalek_fans_app/core/theming/colors.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
 
+import '../../../../core/routing/routes.dart';
+import '../../../../core/widgets/app_directional_button.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -24,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             // Background image
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/images/new_logo.png"),
                   fit: BoxFit.cover,
@@ -37,13 +40,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      child: Image(
+                    SizedBox(
+                      height: 200.h,
+                      child: const Image(
                         image: AssetImage(
                           "assets/images/0100.png",
                         ),
                       ),
-                      height: 200.h,
                     ),
                     SizedBox(height: 20.h),
                     Form(
@@ -110,6 +113,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
+              ),
+            ),
+            Positioned(
+              top: 10,
+              left: 10,
+              child: AppDirectionalButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.onBoardingScreen);
+                },
+                size: 50,
               ),
             ),
           ],
