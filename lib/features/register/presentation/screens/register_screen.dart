@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
@@ -110,7 +111,6 @@ class _RegisterScreen extends State<RegisterScreen> {
                             hintText: "Phone",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
-                            isObscureText: isObscureText,
                           ),
                           SizedBox(
                             height: 20.h,
@@ -208,9 +208,24 @@ class _RegisterScreen extends State<RegisterScreen> {
     );
   }
 
-  void createAccountValidation() {
+  void createAccountValidation() async {
     if (formKey.currentState?.validate() == false) {
       return;
+    }
+    try {
+      var result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      result.user?.uid;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }
