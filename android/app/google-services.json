@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "612349312110",
+    "project_id": "z-fans",
+    "storage_bucket": "z-fans.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612349312110:android:37747959c15fbbf5a5ba7f",
+        "android_client_info": {
+          "package_name": "com.example.zamalek_fans_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiwSpTU-t_wZUzWe97Si0Uf_q4wiRFR6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
