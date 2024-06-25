@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
@@ -5,6 +6,7 @@ import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
 
 import '../../../../core/routing/routes.dart';
+import '../../../../core/validationUtils/validationUtils.dart';
 import '../../../../core/widgets/app_directional_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,6 +19,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   bool isObscureText = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
           fit: StackFit.expand,
           children: [
             // Background image
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/background_photo.png"),
-                  fit: BoxFit.cover,
+            FadeInUpBig(
+              delay: Duration(microseconds: 50),
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/background_photo.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -44,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 200.h,
                       child: const Image(
                         image: AssetImage(
-                          "assets/images/zamalek_arabic_word.png",
+                          "assets/images/main_logo.png",
                         ),
                       ),
                     ),
@@ -54,6 +61,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           AppTextFormField(
+                            validator: (text) {
+                              if (text == null || text.trim().isEmpty) {
+                                return "Please enter your Email";
+                              }
+                              if (!isValidEmail(text)) {
+                                return "Please enter a valid Email";
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            controller: emailController,
                             hintText: "Email",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
@@ -62,6 +80,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 20.h,
                           ),
                           AppTextFormField(
+                            validator: (text) {
+                              if (text == null || text.trim().isEmpty) {
+                                return "Please enter your Password";
+                              }
+                              if (text.length < 6) {
+                                return "At least 6 Characters";
+                              }
+                              return null;
+                            },
+                            controller: passwordController,
                             hintText: "Password",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
@@ -106,7 +134,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.bold,
                               fontSize: 19.sp,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              loginAccountValidation();
+                            },
                           ),
                         ],
                       ),
@@ -129,5 +159,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void loginAccountValidation() {
+    if (formKey.currentState?.validate() == false) {
+      return;
+    }
   }
 }
