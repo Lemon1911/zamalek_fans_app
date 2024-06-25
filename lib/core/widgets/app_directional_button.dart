@@ -7,7 +7,7 @@ class AppDirectionalButton extends StatelessWidget {
   const AppDirectionalButton({
     Key? key,
     required this.onPressed,
-    this.direction,
+    this.direction = "left",
     required this.size,
   }) : super(key: key);
 

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,11 +15,13 @@ class OnboardingScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/background_photo.png"),
-                  fit: BoxFit.cover,
+            FadeInUpBig(
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/background_photo.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -28,43 +31,54 @@ class OnboardingScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 300.h,
-                      child: const Image(
-                        image: AssetImage(
-                          "assets/images/main_logo.png",
+                    FadeInDown(
+                      delay: const Duration(microseconds: 200),
+                      child: SizedBox(
+                        height: 300.h,
+                        child: const Image(
+                          image: AssetImage(
+                            "assets/images/main_logo.png",
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
                       height: 30.h,
                     ),
-                    AppTextButton(
-                      buttonText: "Log in",
-                      backgroundColor: ColorsManager.lightRed3.withOpacity(0.7),
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.sp,
+                    FadeInLeftBig(
+                      delay: const Duration(microseconds: 250),
+                      child: AppTextButton(
+                        buttonText: "Log in",
+                        backgroundColor:
+                            ColorsManager.lightRed3.withOpacity(0.7),
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.sp,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.loginScreen);
+                        },
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.loginScreen);
-                      },
                     ),
                     SizedBox(
                       height: 50.h,
                     ),
-                    AppTextButton(
-                      buttonText: "Sign up",
-                      backgroundColor: ColorsManager.lightRed3.withOpacity(0.7),
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.sp,
+                    FadeInRightBig(
+                      delay: const Duration(microseconds: 300),
+                      child: AppTextButton(
+                        buttonText: "Sign up",
+                        backgroundColor:
+                            ColorsManager.lightRed3.withOpacity(0.7),
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.sp,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.registerScreen);
+                        },
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.registerScreen);
-                      },
                     ),
                   ],
                 ),
