@@ -9,7 +9,7 @@ import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/validationUtils/validationUtils.dart';
 import '../../../../core/widgets/app_directional_button.dart';
-import '../manager/login_bloc.dart';
+import '../manager/login_cubit.dart';
 import '../manager/login_state.dart';
 
 class LoginScreen extends StatefulWidget {

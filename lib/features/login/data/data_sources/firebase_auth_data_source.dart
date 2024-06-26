@@ -19,19 +19,4 @@ class FirebaseAuthDataSource {
       return null;
     }
   }
-
-  Future<User?> registerWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      final userCredential = await firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return userCredential.user;
-    } catch (e) {
-      // Handle registration errors
-      print('Error registering user: $e');
-      return null;
-    }
-  }
 }
