@@ -1,30 +1,32 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
-import 'package:zamalek_fans_app/features/register/presentation/widgets/register_icon_widget.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/validationUtils/validationUtils.dart';
 import '../../../../core/widgets/app_directional_button.dart';
+import '../manager/register_cubit.dart';
+import '../manager/register_state.dart';
+import '../widgets/register_icon_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreen();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreen extends State<RegisterScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
   bool isObscureText = true;
-  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,8 @@ class _RegisterScreen extends State<RegisterScreen> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // Background image
             FadeInUpBig(
+              delay: Duration(microseconds: 50),
               child: Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -47,31 +49,30 @@ class _RegisterScreen extends State<RegisterScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
               child: SingleChildScrollView(
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 200.h,
-                        child: const Image(
-                          image: AssetImage(
-                            "assets/images/main_logo.png",
-                          ),
-                        ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 200.h,
+                      child: const Image(
+                        image: AssetImage("assets/images/main_logo.png"),
                       ),
-                      SizedBox(height: 10.h),
-                      Column(
+                    ),
+                    SizedBox(height: 20.h),
+                    Form(
+                      key: formKey,
+                      child: Column(
                         children: [
                           AppTextFormField(
-                            controller: nameController,
                             validator: (text) {
                               if (text == null || text.trim().isEmpty) {
                                 return "Please enter your Name";
                               }
+
                               return null;
                             },
-                            keyboardType: TextInputType.name,
+                            keyboardType: TextInputType.text,
+                            controller: nameController,
                             hintText: "Name",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
@@ -80,7 +81,6 @@ class _RegisterScreen extends State<RegisterScreen> {
                             height: 20.h,
                           ),
                           AppTextFormField(
-                            controller: emailController,
                             validator: (text) {
                               if (text == null || text.trim().isEmpty) {
                                 return "Please enter your Email";
@@ -91,6 +91,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                               return null;
                             },
                             keyboardType: TextInputType.emailAddress,
+                            controller: emailController,
                             hintText: "Email",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
@@ -101,13 +102,13 @@ class _RegisterScreen extends State<RegisterScreen> {
                           AppTextFormField(
                             validator: (text) {
                               if (text == null || text.trim().isEmpty) {
-                                return "Please enter your Phone Number";
+                                return "Please enter your phone number";
                               }
 
                               return null;
                             },
-                            controller: phoneController,
                             keyboardType: TextInputType.phone,
+                            controller: phoneController,
                             hintText: "Phone",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
@@ -116,7 +117,6 @@ class _RegisterScreen extends State<RegisterScreen> {
                             height: 20.h,
                           ),
                           AppTextFormField(
-                            controller: passwordController,
                             validator: (text) {
                               if (text == null || text.trim().isEmpty) {
                                 return "Please enter your Password";
@@ -126,6 +126,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                               }
                               return null;
                             },
+                            controller: passwordController,
                             hintText: "Password",
                             backgroundColor:
                                 ColorsManager.mainWhite.withOpacity(0.5),
@@ -147,48 +148,65 @@ class _RegisterScreen extends State<RegisterScreen> {
                           SizedBox(
                             height: 25.h,
                           ),
-                          AppTextButton(
-                            buttonText: "Sign up",
-                            backgroundColor:
-                                ColorsManager.lightRed3.withOpacity(0.7),
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19.sp,
-                            ),
-                            onPressed: () {
-                              createAccountValidation();
+                          BlocConsumer<RegisterCubit, RegisterState>(
+                            listener: (context, state) {
+                              if (state is RegisterSuccess) {
+                                // Navigate to another screen on successful registration
+                                Navigator.pushNamed(context, Routes.homeScreen);
+                              } else if (state is RegisterFailure) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(state.error)),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is RegisterLoading) {
+                                return CircularProgressIndicator();
+                              }
+                              return AppTextButton(
+                                buttonText: "Register",
+                                backgroundColor:
+                                    ColorsManager.lightRed3.withOpacity(0.7),
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19.sp,
+                                ),
+                                onPressed: () {
+                                  if (formKey.currentState?.validate() ==
+                                      true) {
+                                    BlocProvider.of<RegisterCubit>(context)
+                                        .register(
+                                      emailController.text,
+                                      passwordController.text,
+                                      nameController.text,
+                                      phoneController.text,
+                                    );
+                                  }
+                                },
+                              );
                             },
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 10.h),
-                      Text(
-                        "Or Sign up with",
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(height: 5.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RegisterIconWidget(
-                            onPressed: () {},
-                            size: 50,
-                            imagePath: "assets/images/facebook.png",
-                          ),
-                          RegisterIconWidget(
-                            onPressed: () {},
-                            size: 40,
-                            imagePath: "assets/images/google.png",
+                          SizedBox(height: 25.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              RegisterIconWidget(
+                                onPressed: () {},
+                                size: 50,
+                                imagePath: "assets/images/facebook.png",
+                              ),
+                              RegisterIconWidget(
+                                onPressed: () {},
+                                size: 50,
+                                imagePath: "assets/images/google.png",
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -206,26 +224,5 @@ class _RegisterScreen extends State<RegisterScreen> {
         ),
       ),
     );
-  }
-
-  void createAccountValidation() async {
-    if (formKey.currentState?.validate() == false) {
-      return;
-    }
-    try {
-      var result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      result.user?.uid;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
-    }
   }
 }
