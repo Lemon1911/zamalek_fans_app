@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
@@ -9,6 +9,8 @@ import 'package:zamalek_fans_app/core/widgets/app_text_form_field.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/validationUtils/validationUtils.dart';
 import '../../../../core/widgets/app_directional_button.dart';
+import '../manager/login_bloc.dart';
+import '../manager/login_state.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -126,17 +128,40 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 25.h,
                           ),
-                          AppTextButton(
-                            buttonText: "Login",
-                            backgroundColor:
-                                ColorsManager.lightRed3.withOpacity(0.7),
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19.sp,
-                            ),
-                            onPressed: () {
-                              loginAccountValidation();
+                          BlocConsumer<LoginCubit, LoginState>(
+                            listener: (context, state) {
+                              if (state is LoginSuccess) {
+                                // Navigate to another screen on successful login
+                                Navigator.pushNamed(context, Routes.homeScreen);
+                              } else if (state is LoginFailure) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(state.error)),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is LoginLoading) {
+                                return CircularProgressIndicator();
+                              }
+                              return AppTextButton(
+                                buttonText: "Login",
+                                backgroundColor:
+                                    ColorsManager.lightRed3.withOpacity(0.7),
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19.sp,
+                                ),
+                                onPressed: () {
+                                  if (formKey.currentState?.validate() ==
+                                      true) {
+                                    BlocProvider.of<LoginCubit>(context).login(
+                                      emailController.text,
+                                      passwordController.text,
+                                    );
+                                  }
+                                },
+                              );
                             },
                           ),
                         ],
@@ -160,23 +185,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  void loginAccountValidation() async {
-    if (formKey.currentState?.validate() == false) {
-      return;
-    }
-    try {
-      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    }
   }
 }
