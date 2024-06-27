@@ -152,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             listener: (context, state) {
                               if (state is RegisterSuccess) {
                                 // Navigate to another screen on successful registration
-                                Navigator.pushNamed(context, Routes.homeScreen);
+                                Navigator.pushNamed(context, Routes.homeLayout);
                               } else if (state is RegisterFailure) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(state.error)),
