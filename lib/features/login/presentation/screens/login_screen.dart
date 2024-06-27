@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             listener: (context, state) {
                               if (state is LoginSuccess) {
                                 // Navigate to another screen on successful login
-                                Navigator.pushNamed(context, Routes.homeScreen);
+                                Navigator.pushNamed(context, Routes.homeLayout);
                               } else if (state is LoginFailure) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(content: Text(state.error)),
