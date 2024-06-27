@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamalek_fans_app/core/routing/routes.dart';
-import 'package:zamalek_fans_app/features/home/presentation/screens/home_screen.dart';
+import 'package:zamalek_fans_app/features/home_layout/presentation/screens/home_layout.dart';
 import 'package:zamalek_fans_app/features/login/presentation/screens/login_screen.dart';
 
+import '../../features/home_layout/presentation/manager/home_layout_cubit.dart';
 import '../../features/login/data/data_sources/firebase_auth_data_source.dart';
 import '../../features/login/data/repositories/login_repo_impl.dart';
 import '../../features/login/domain/use_cases/login_use_case.dart';
@@ -50,9 +51,12 @@ class AppRouter {
           },
         );
       case Routes.homeScreen:
-        return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
-        );
+        return MaterialPageRoute(builder: (_) {
+          return BlocProvider(
+            create: (_) => NavigationCubit(),
+            child: HomeLayout(),
+          );
+        });
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
@@ -64,33 +68,3 @@ class AppRouter {
     }
   }
 }
-// class AppRouter {
-//   Route generateRoute(RouteSettings settings) {
-//     switch (settings.name) {
-//       case Routes.onBoardingScreen:
-//         return MaterialPageRoute(
-//           builder: (_) => OnboardingScreen(),
-//         );
-//       case Routes.loginScreen:
-//         return MaterialPageRoute(
-//           builder: (_) => const LoginScreen(),
-//         );
-//       case Routes.registerScreen:
-//         return MaterialPageRoute(
-//           builder: (_) => const RegisterScreen(),
-//         );
-//       case Routes.homeScreen:
-//         return MaterialPageRoute(
-//           builder: (_) => const HomeScreen(),
-//         );
-//       default:
-//         return MaterialPageRoute(
-//           builder: (_) => Scaffold(
-//             body: Center(
-//               child: Text("No Route Defined ${settings.name}"),
-//             ),
-//           ),
-//         );
-//     }
-//   }
-// }
