@@ -9,18 +9,21 @@ class NavigationBarWidget extends StatelessWidget {
     return BlocBuilder<NavigationCubit, NavigationTab>(
       builder: (context, state) {
         return BottomNavigationBar(
+          backgroundColor: Colors.blue,
+          unselectedItemColor: Colors.blue,
+          selectedItemColor: Colors.blueGrey,
           currentIndex: NavigationTab.values.indexOf(state),
           onTap: (index) => context
               .read<NavigationCubit>()
               .selectTab(NavigationTab.values[index]),
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Chats'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.table_chart), label: 'Tables'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today), label: 'Match Calendar'),
+                icon: Icon(Icons.calendar_today), label: 'News'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.chat), label: 'Match Chats'),
+                icon: Icon(Icons.chat), label: 'Match Calendar'),
             BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Store'),
           ],
         );
