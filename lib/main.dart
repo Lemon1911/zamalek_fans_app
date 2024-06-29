@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:zamalek_fans_app/core/routing/app_router.dart';
 import 'package:zamalek_fans_app/zamalek_fans_app.dart';
 
+import 'core/injections/di_setup.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -10,6 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  setup();
   runApp(
     ZamalekFansApp(
       appRouter: AppRouter(),
