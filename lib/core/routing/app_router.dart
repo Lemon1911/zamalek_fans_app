@@ -50,7 +50,7 @@ class AppRouter {
             );
           },
         );
-      case Routes.homeScreen:
+      case Routes.homeLayout:
         return MaterialPageRoute(builder: (_) {
           return BlocProvider(
             create: (_) => NavigationCubit(),
