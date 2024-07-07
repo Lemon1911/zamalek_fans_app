@@ -1,6 +1,10 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class NetworkConfig {
-  static const String baseUrl = 'https://v3.football.api-sports.io/';
-  static const Map<String, String> headers = {
-    'x-rapidapi-key': '8f65f483b1254a2ec20a77591abfa9f6',
-  };
+  static String get baseUrl =>
+      dotenv.env['API_BASE_URL'] ?? 'https://v3.football.api-sports.io/';
+
+  static Map<String, String> get headers => {
+        'x-apisports-key': dotenv.env['API_KEY'] ?? '',
+      };
 }

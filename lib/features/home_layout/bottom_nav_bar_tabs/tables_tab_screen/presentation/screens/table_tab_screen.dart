@@ -28,14 +28,14 @@ class TableTabScreen extends StatelessWidget {
           height: 20.h,
         ),
         TeamRowStandingTitle(),
-        // Expanded(
-        //   child: ListView.separated(
-        //     itemBuilder: (context, index) => TeamRowStandingInfo(),
-        //     separatorBuilder: (context, index) =>
-        //         Divider(color: Colors.white, thickness: 3, height: 3),
-        //     itemCount: 18,
-        //   ),
-        // ),
+        Expanded(
+          child: ListView.separated(
+            itemBuilder: (context, index) => TeamRowStandingInfo(),
+            separatorBuilder: (context, index) =>
+                Divider(color: Colors.white, thickness: 3, height: 3),
+            itemCount: 18,
+          ),
+        ),
       ],
     );
   }
