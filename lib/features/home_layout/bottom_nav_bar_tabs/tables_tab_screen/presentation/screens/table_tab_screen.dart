@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
 import 'package:zamalek_fans_app/core/widgets/app_text_button.dart';
 
-import '../manager/tables_tab_screen_cubit.dart';
-import '../manager/tables_tab_screen_states.dart';
 import '../widgets/team_row_info_widget.dart';
 
 class TableTabScreen extends StatelessWidget {
@@ -39,29 +36,6 @@ class TableTabScreen extends StatelessWidget {
         //     itemCount: 18,
         //   ),
         // ),
-        BlocBuilder<StandingsCubit, StandingsState>(
-          builder: (context, state) {
-            if (state.isLoading) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state.error.isNotEmpty) {
-              return Center(child: Text(state.error));
-            } else {
-              return Expanded(
-                child: ListView.builder(
-                  itemCount: state.standings.length,
-                  itemBuilder: (context, index) {
-                    final standing = state.standings[index];
-                    return ListTile(
-                      title: Text(standing.team),
-                      subtitle: Text(
-                          'Rank: ${standing.rank}, Points: ${standing.points}'),
-                    );
-                  },
-                ),
-              );
-            }
-          },
-        ),
       ],
     );
   }
