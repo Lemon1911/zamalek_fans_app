@@ -3,7 +3,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zamalek_fans_app/core/theming/colors.dart';
 
 class TeamRowStandingInfo extends StatelessWidget {
-  const TeamRowStandingInfo({super.key});
+  final int rank;
+  final String teamName;
+  final String teamLogo;
+  final int points;
+  final int matchesPlayed;
+  final int win;
+  final int draw;
+  final int lose;
+
+  const TeamRowStandingInfo({
+    Key? key,
+    required this.rank,
+    required this.teamName,
+    required this.teamLogo,
+    required this.points,
+    required this.matchesPlayed,
+    required this.win,
+    required this.draw,
+    required this.lose,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +31,11 @@ class TeamRowStandingInfo extends StatelessWidget {
         horizontal: 8.w,
       ),
       child: Container(
-        height: 45.h,
+        height: 50.h,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(
-              5,
+              5.r,
             ),
             color: ColorsManager.blue),
         child: Row(
@@ -25,24 +44,26 @@ class TeamRowStandingInfo extends StatelessWidget {
             SizedBox(
               width: 0.05.sw,
               child: Text(
-                "1",
+                "$rank",
                 style: TextStyle(
                     color: ColorsManager.mainWhite,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16.sp),
+                    fontSize: 14.sp),
                 textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
               width: 0.1.sw,
               child: Container(
-                width: 30.0.w,
-                height: 30.0.h,
+                width: 35.0.w,
+                height: 35.0.h,
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   shape: BoxShape.circle,
                 ),
-                child: Image.asset("assets/images/left_arrow.png"),
+                child: Image.network(
+                  teamLogo,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
             Row(
@@ -50,40 +71,7 @@ class TeamRowStandingInfo extends StatelessWidget {
                 SizedBox(
                   width: 0.30.sw,
                   child: Text(
-                    "  Zamalek",
-                    style: TextStyle(
-                        color: ColorsManager.mainWhite,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                SizedBox(
-                  width: 0.1.sw,
-                  child: Text(
-                    "20",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: ColorsManager.mainWhite,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.sp),
-                  ),
-                ),
-                SizedBox(
-                  width: 0.1.sw,
-                  child: Text(
-                    "20",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: ColorsManager.mainWhite,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.sp),
-                  ),
-                ),
-                SizedBox(
-                  width: 0.1.sw,
-                  child: Text(
-                    "18",
+                    "$teamName",
                     style: TextStyle(
                         color: ColorsManager.mainWhite,
                         fontWeight: FontWeight.bold,
@@ -94,7 +82,18 @@ class TeamRowStandingInfo extends StatelessWidget {
                 SizedBox(
                   width: 0.1.sw,
                   child: Text(
-                    "18",
+                    "$matchesPlayed",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                  ),
+                ),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "$win",
                     style: TextStyle(
                         color: ColorsManager.mainWhite,
                         fontWeight: FontWeight.bold,
@@ -105,7 +104,29 @@ class TeamRowStandingInfo extends StatelessWidget {
                 SizedBox(
                   width: 0.1.sw,
                   child: Text(
-                    "43",
+                    "$draw",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "$lose",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "$points",
                     style: TextStyle(
                         color: ColorsManager.mainWhite,
                         fontWeight: FontWeight.bold,
@@ -215,7 +236,7 @@ class TeamRowStandingTitle extends StatelessWidget {
                     style: TextStyle(
                         color: ColorsManager.mainWhite,
                         fontWeight: FontWeight.bold,
-                        fontSize: 18.sp),
+                        fontSize: 17.sp),
                     textAlign: TextAlign.center,
                   ),
                 ),
