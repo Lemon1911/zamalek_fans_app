@@ -8,111 +8,116 @@ class TeamRowStandingInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.w,
+      ),
       child: Container(
-          height: 45.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                5,
+        height: 45.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              5,
+            ),
+            color: ColorsManager.blue),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              width: 0.05.sw,
+              child: Text(
+                "1",
+                style: TextStyle(
+                    color: ColorsManager.mainWhite,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp),
+                textAlign: TextAlign.center,
               ),
-              color: ColorsManager.camel),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 0.05.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("1"),
+            ),
+            SizedBox(
+              width: 0.1.sw,
+              child: Container(
+                width: 30.0.w,
+                height: 30.0.h,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
                 ),
+                child: Image.asset("assets/images/left_arrow.png"),
               ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ImageIcon(
-                    AssetImage(
-                      "assets",
-                    ),
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 0.30.sw,
+                  child: Text(
+                    "  Zamalek",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp),
+                    textAlign: TextAlign.start,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 0.24.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Zamalek"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "20",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("31"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "20",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("31"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "18",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("31"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "18",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("31"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "43",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("31"),
-                ),
-              ),
-            ],
-          )),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -123,88 +128,102 @@ class TeamRowStandingTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
       child: Container(
-          height: 40.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                5,
+        height: 45.h,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              5.r,
+            ),
+            color: ColorsManager.blue),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              width: 0.05.sw,
+              child: Text(
+                "#",
+                style: TextStyle(
+                    color: ColorsManager.mainWhite,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.sp),
+                textAlign: TextAlign.center,
               ),
-              color: ColorsManager.blue),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 0.40.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("teams", textAlign: TextAlign.center),
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 0.40.sw,
+                  child: Text(
+                    "Teams",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Ply"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "P",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp),
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Pts"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "W",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp),
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Win"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "D",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Drw"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "L",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              VerticalDivider(
-                thickness: 3,
-                width: 3,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 0.10.sw,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Los"),
+                SizedBox(
+                  width: 0.1.sw,
+                  child: Text(
+                    "Pts",
+                    style: TextStyle(
+                        color: ColorsManager.mainWhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.sp),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
