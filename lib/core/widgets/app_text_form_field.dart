@@ -44,41 +44,41 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: hint,
-        errorStyle: const TextStyle(
+        errorStyle: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.w500,
-          fontSize: 14,
+          fontSize: 14.sp,
         ),
         isDense: true,
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(
-              horizontal: 26.w,
-              vertical: 24.h,
+              horizontal: 20.w,
+              vertical: 20.h,
             ),
         focusedBorder: focusBorder ??
             OutlineInputBorder(
-              borderSide: const BorderSide(
+              borderSide: BorderSide(
                 color: ColorsManager.lightRed3,
-                width: 1.3,
+                width: 1.3.w,
               ),
               borderRadius: BorderRadius.circular(
-                16,
+                16.r,
               ),
             ),
         enabledBorder: enabledBorder ??
             OutlineInputBorder(
-              borderSide: const BorderSide(
+              borderSide: BorderSide(
                 color: ColorsManager.lightRed3,
-                width: 1.3,
+                width: 1.3.w,
               ),
               borderRadius: BorderRadius.circular(
-                16,
+                16.r,
               ),
             ),
         hintStyle: hintStyle ??
-            const TextStyle(
+            TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 14,
+              fontSize: 14.sp,
               color: ColorsManager.lightRed3,
             ),
         hintText: hintText,
@@ -87,9 +87,9 @@ class AppTextFormField extends StatelessWidget {
         filled: true,
       ),
       obscureText: isObscureText ?? false,
-      style: const TextStyle(
+      style: TextStyle(
         fontWeight: FontWeight.w400,
-        fontSize: 19,
+        fontSize: 19.sp,
         color: ColorsManager.lightRed3,
       ),
     );

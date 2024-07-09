@@ -16,4 +16,5 @@ class ColorsManager {
   static const Color backGroundMain = Color(0xFff7f7f7);
   static const Color blue = Color(0xFF247BA0);
   static const Color red = Color(0xFFAD343E);
+  static const Color green = Color(0xFF90B494);
 }
