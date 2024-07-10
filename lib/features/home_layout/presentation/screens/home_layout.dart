@@ -15,11 +15,11 @@ class HomeLayout extends StatelessWidget {
   HomeLayout({super.key});
 
   final List<Widget> screens = [
-    ChatTabScreen(),
-    TableTabScreen(),
-    NewsTabScreen(),
-    MatchCalenderTabScreen(),
-    StoreTabScreen(),
+    const ChatTabScreen(),
+    const TableTabScreen(),
+    const NewsTabScreen(),
+    const MatchCalenderTabScreen(),
+    const StoreTabScreen(),
   ];
 
   @override
@@ -35,37 +35,8 @@ class HomeLayout extends StatelessWidget {
             return screens[state];
           },
         ),
-        bottomNavigationBar: CustomNavigationBarWidget(),
+        bottomNavigationBar: const CustomNavigationBarWidget(),
       ),
     );
   }
 }
-// class HomeLayout extends StatelessWidget {
-//   HomeLayout({super.key});
-//
-//   final List<Widget> screens = [
-//     ChatTabScreen(),
-//     TableTabScreen(),
-//     NewsTabScreen(),
-//     MatchCalenderTabScreen(),
-//     StoreTabScreen(),
-//   ];
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         appBar: AppBar(
-//           backgroundColor: ColorsManager.blue,
-//           toolbarHeight: 0.20.sh,
-//         ),
-//         body: BlocBuilder<NavigationCubit, int>(
-//           builder: (context, state) {
-//             return screens[state];
-//           },
-//         ),
-//         bottomNavigationBar: NavigationBarWidget(),
-//       ),
-//     );
-//   }
-// }
