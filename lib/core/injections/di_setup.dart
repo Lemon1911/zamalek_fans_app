@@ -17,20 +17,16 @@ void setup() {
   // Register StandingRemoteDataSource
   getIt.registerLazySingleton<StandingRemoteDataSource>(
       () => StandingDataSourceImpl(getIt<ApiService>()));
-  print('StandingDataSource registered');
 
   // Register StandingRepository
   getIt.registerLazySingleton<StandingRepo>(
       () => StandingRepoImpl(getIt<StandingRemoteDataSource>()));
-  print('StandingRepository registered');
 
   // Register GetStandings use case
   getIt.registerLazySingleton<GetStandings>(
       () => GetStandings(getIt<StandingRepo>()));
-  print('GetStandings registered');
 
   // Register StandingsCubit
   getIt.registerFactory<StandingsCubit>(
       () => StandingsCubit(getIt<GetStandings>()));
-  print('StandingsCubit registered');
 }

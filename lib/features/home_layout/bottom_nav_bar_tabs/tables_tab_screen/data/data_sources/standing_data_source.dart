@@ -13,11 +13,9 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
   @override
   Future<List<StandingModel>> getStandings() async {
     final response = await apiService.get('/standings', queryParameters: {
-      'league': 233, // Replace with the actual league ID
-      'season': '2023' // Replace with the actual season year
+      'league': "233",
+      'season': '2023',
     });
-
-    print(response.data); // Debugging line
 
     final standings =
         (response.data['response'][0]['league']['standings'][0] as List)
