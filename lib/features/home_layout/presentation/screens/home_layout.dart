@@ -30,13 +30,42 @@ class HomeLayout extends StatelessWidget {
           backgroundColor: ColorsManager.blue,
           toolbarHeight: 0.20.sh,
         ),
-        body: BlocBuilder<NavigationCubit, NavigationTab>(
+        body: BlocBuilder<NavigationCubit, int>(
           builder: (context, state) {
-            return screens[NavigationTab.values.indexOf(state)];
+            return screens[state];
           },
         ),
-        bottomNavigationBar: NavigationBarWidget(),
+        bottomNavigationBar: CustomNavigationBarWidget(),
       ),
     );
   }
 }
+// class HomeLayout extends StatelessWidget {
+//   HomeLayout({super.key});
+//
+//   final List<Widget> screens = [
+//     ChatTabScreen(),
+//     TableTabScreen(),
+//     NewsTabScreen(),
+//     MatchCalenderTabScreen(),
+//     StoreTabScreen(),
+//   ];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//       child: Scaffold(
+//         appBar: AppBar(
+//           backgroundColor: ColorsManager.blue,
+//           toolbarHeight: 0.20.sh,
+//         ),
+//         body: BlocBuilder<NavigationCubit, int>(
+//           builder: (context, state) {
+//             return screens[state];
+//           },
+//         ),
+//         bottomNavigationBar: NavigationBarWidget(),
+//       ),
+//     );
+//   }
+// }

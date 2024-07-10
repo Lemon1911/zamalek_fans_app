@@ -35,7 +35,7 @@ class TeamRowStandingInfo extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [ColorsManager.lightRed1, ColorsManager.pinkRed],
+            colors: const [ColorsManager.lightRed1, ColorsManager.pinkRed],
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             stops: [0.35.w, 0.7.w],

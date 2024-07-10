@@ -26,7 +26,6 @@ class AppRouter {
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder: (_) {
-            // Created necessary instances
             final firebaseAuthDataSource =
                 FirebaseAuthDataSource(FirebaseAuth.instance);
             final loginRepository = LoginRepositoryImpl(firebaseAuthDataSource);
@@ -40,7 +39,6 @@ class AppRouter {
       case Routes.registerScreen:
         return MaterialPageRoute(
           builder: (_) {
-            // Created necessary instances for register
             final registerRepository =
                 RegisterRepositoryImpl(FirebaseAuth.instance);
             final registerUseCase = RegisterUseCase(registerRepository);

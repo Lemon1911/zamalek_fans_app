@@ -16,6 +16,7 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
       'league': "233",
       'season': '2023',
     });
+    print(response.data); // Debugging line
 
     final standings =
         (response.data['response'][0]['league']['standings'][0] as List)
