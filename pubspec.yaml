@@ -52,6 +52,8 @@ dependencies:
   retrofit_generator: ^8.1.0
   retrofit: ^4.1.0
   flutter_dotenv: ^5.1.0
+  shared_preferences: ^2.2.3
+
 
 
 
