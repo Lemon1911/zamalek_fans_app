@@ -1,9 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum NavigationTab { matchChats, tables, news, matchCalendar, store }
+class NavigationCubit extends Cubit<int> {
+  NavigationCubit() : super(2); // Start with 'news' tab
 
-class NavigationCubit extends Cubit<NavigationTab> {
-  NavigationCubit() : super(NavigationTab.news); // Start with 'tables' tab
-
-  void selectTab(NavigationTab tab) => emit(tab);
+  void selectTab(int index) => emit(index);
 }
