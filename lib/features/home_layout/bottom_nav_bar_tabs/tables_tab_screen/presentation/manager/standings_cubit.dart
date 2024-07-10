@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/standing.dart';
 import '../../domain/use_cases/get_standings.dart';
@@ -15,10 +15,8 @@ class StandingsCubit extends Cubit<StandingsState> {
     try {
       emit(StandingsLoading());
       final standings = await getStandings();
-      print(standings); // Debugging line
       emit(StandingsLoaded(standings));
     } catch (e) {
-      print(e); // Debugging line
       emit(StandingsError(e.toString()));
     }
   }
