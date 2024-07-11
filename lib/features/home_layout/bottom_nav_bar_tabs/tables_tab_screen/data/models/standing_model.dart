@@ -31,4 +31,21 @@ class StandingModel {
       lose: json['all']['lose'] ?? 0,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'rank': rank,
+      'team': {
+        'name': teamName,
+        'logo': teamLogo,
+      },
+      'points': points,
+      'all': {
+        'played': played,
+        'win': win,
+        'draw': draw,
+        'lose': lose,
+      }
+    };
+  }
 }

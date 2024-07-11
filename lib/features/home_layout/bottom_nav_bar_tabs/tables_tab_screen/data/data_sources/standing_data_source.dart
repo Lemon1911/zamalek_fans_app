@@ -20,9 +20,11 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
     final cachedData = prefs.getString('standings');
 
     if (cachedData != null) {
+      print('Using cached data');
       final List<dynamic> decodedData = jsonDecode(cachedData);
       final List<StandingModel> standings =
           decodedData.map((data) => StandingModel.fromJson(data)).toList();
+      print('Cached data: $decodedData');
       return standings;
     } else {
       try {
@@ -37,7 +39,11 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
                 .map((data) => StandingModel.fromJson(data))
                 .toList();
 
-        prefs.setString('standings', jsonEncode(standings));
+        // Cache the response
+        final List<Map<String, dynamic>> jsonList =
+            standings.map((standing) => standing.toJson()).toList();
+        prefs.setString('standings', jsonEncode(jsonList));
+        print('New data cached');
         return standings;
       } catch (e) {
         print('Error fetching standings: $e');

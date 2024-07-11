@@ -47,7 +47,7 @@ class CustomNavigationBarWidget extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 10.h,
+              bottom: 2.h,
               left: (ScreenUtil().screenWidth / 2) - 30.w,
               child: GestureDetector(
                 onTap: () {
