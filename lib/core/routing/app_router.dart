@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:zamalek_fans_app/core/routing/routes.dart';
 import 'package:zamalek_fans_app/features/home_layout/presentation/screens/home_layout.dart';
 import 'package:zamalek_fans_app/features/login/presentation/screens/login_screen.dart';
 
+import '../../features/home_layout/bottom_nav_bar_tabs/match_calendar_tab_screen/domain/use_cases/get_past_matches.dart';
+import '../../features/home_layout/bottom_nav_bar_tabs/match_calendar_tab_screen/domain/use_cases/get_upcoming_matches.dart';
+import '../../features/home_layout/bottom_nav_bar_tabs/match_calendar_tab_screen/presentation/manager/matches_cubit.dart';
 import '../../features/home_layout/presentation/manager/home_layout_cubit.dart';
 import '../../features/login/data/data_sources/firebase_auth_data_source.dart';
 import '../../features/login/data/repositories/login_repo_impl.dart';
@@ -17,6 +21,8 @@ import '../../features/register/presentation/manager/register_cubit.dart';
 import '../../features/register/presentation/screens/register_screen.dart';
 
 class AppRouter {
+  final getIt = GetIt.instance;
+
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.onBoardingScreen:
@@ -49,12 +55,24 @@ class AppRouter {
           },
         );
       case Routes.homeLayout:
-        return MaterialPageRoute(builder: (_) {
-          return BlocProvider(
-            create: (_) => NavigationCubit(),
-            child: HomeLayout(),
-          );
-        });
+        return MaterialPageRoute(
+          builder: (_) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (_) => NavigationCubit(),
+                ),
+                BlocProvider(
+                  create: (_) => MatchesCubit(
+                    getIt<GetPastMatches>(),
+                    getIt<GetUpcomingMatches>(),
+                  )..fetchMatches(),
+                ),
+              ],
+              child: HomeLayout(),
+            );
+          },
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
