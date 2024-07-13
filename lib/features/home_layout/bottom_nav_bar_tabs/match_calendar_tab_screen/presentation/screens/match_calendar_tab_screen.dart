@@ -23,18 +23,16 @@ class MatchCalendarTabScreen extends StatelessWidget {
           } else if (state is MatchesLoaded) {
             final pastMatches = state.pastMatches;
             final upcomingMatches = state.upcomingMatches;
-            return Expanded(
-              child: ListView(
-                children: [
-                  ...upcomingMatches.map((match) => MatchUpcomingWidget(
-                        stadium: match.stadium,
-                        homeTeam: match.homeTeam,
-                        homeTeamLogo: match.homeTeamLogo,
-                        awayTeam: match.awayTeam,
-                        awayTeamLogo: match.awayTeamLogo,
-                      )),
-                ],
-              ),
+            return ListView(
+              children: [
+                ...upcomingMatches.map((match) => MatchUpcomingWidget(
+                      stadium: match.stadium,
+                      homeTeam: match.homeTeam,
+                      homeTeamLogo: match.homeTeamLogo,
+                      awayTeam: match.awayTeam,
+                      awayTeamLogo: match.awayTeamLogo,
+                    )),
+              ],
             );
           } else if (state is MatchesError) {
             return Center(child: Text('Error: ${state.message}'));
