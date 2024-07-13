@@ -30,12 +30,12 @@ class MatchModel extends Match {
           ? json['teams']['home']['name']
           : 'Unknown Home Team';
       final homeTeamLogo =
-          json['teams']['home'] != null ? json['teams']['home']['logo'] : '';
+          json['teams']['home'] != null ? json['teams']['home']['logo'] : ' ';
       final awayTeam = json['teams']['away'] != null
           ? json['teams']['away']['name']
           : 'Unknown Away Team';
       final awayTeamLogo =
-          json['teams']['away'] != null ? json['teams']['away']['logo'] : '';
+          json['teams']['away'] != null ? json['teams']['away']['logo'] : ' ';
 
       return MatchModel(
         stadium: stadium,
