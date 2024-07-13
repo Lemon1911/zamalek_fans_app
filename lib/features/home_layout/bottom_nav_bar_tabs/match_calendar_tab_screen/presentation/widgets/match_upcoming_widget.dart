@@ -169,7 +169,7 @@ class MatchUpcomingWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           width: 40.0.w,
@@ -191,11 +191,17 @@ class MatchUpcomingWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(
-                      "date",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      alignment: Alignment.center,
+                      width: 40.w,
+                      height: 40.h,
+                      color: Colors.white38,
+                      child: Text(
+                        "date",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Column(
@@ -245,7 +251,7 @@ class MatchUpcomingWidget extends StatelessWidget {
                 child: Center(
                   child: Text(
                     stadium,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
