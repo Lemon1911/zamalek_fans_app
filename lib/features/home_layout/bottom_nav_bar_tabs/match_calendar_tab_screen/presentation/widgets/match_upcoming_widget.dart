@@ -109,8 +109,8 @@ class MatchUpcomingWidget extends StatelessWidget {
         height: 0.2.sh,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: const [ColorsManager.pinkRed, ColorsManager.mainWhite],
+          gradient: const LinearGradient(
+            colors: [ColorsManager.pinkRed, ColorsManager.mainWhite],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             stops: [0.5, 0.99],
@@ -154,7 +154,7 @@ class MatchUpcomingWidget extends StatelessWidget {
                     bottomRight: Radius.circular(20.r),
                   ),
                 ),
-                child: Center(child: Text("league")),
+                child: const Center(child: Text("league")),
               ),
             ),
             Positioned(
@@ -187,7 +187,9 @@ class MatchUpcomingWidget extends StatelessWidget {
                           _truncateText(homeTeam, 10),
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16.sp),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.sp,
+                          ),
                         ),
                       ],
                     ),
@@ -223,7 +225,9 @@ class MatchUpcomingWidget extends StatelessWidget {
                           _truncateText(awayTeam, 10),
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16.sp),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.sp,
+                          ),
                         ),
                       ],
                     ),
@@ -250,10 +254,11 @@ class MatchUpcomingWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    stadium,
-                    style: const TextStyle(
+                    _truncateText(stadium, 25),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      fontSize: 12.sp,
                     ),
                   ),
                 ),

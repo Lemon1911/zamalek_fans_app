@@ -19,19 +19,21 @@ class MatchCalendarTabScreen extends StatelessWidget {
       child: BlocBuilder<MatchesCubit, MatchesState>(
         builder: (context, state) {
           if (state is MatchesLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is MatchesLoaded) {
             final pastMatches = state.pastMatches;
             final upcomingMatches = state.upcomingMatches;
             return ListView(
               children: [
-                ...upcomingMatches.map((match) => MatchUpcomingWidget(
-                      stadium: match.stadium,
-                      homeTeam: match.homeTeam,
-                      homeTeamLogo: match.homeTeamLogo,
-                      awayTeam: match.awayTeam,
-                      awayTeamLogo: match.awayTeamLogo,
-                    )),
+                ...upcomingMatches.map(
+                  (match) => MatchUpcomingWidget(
+                    stadium: match.stadium,
+                    homeTeam: match.homeTeam,
+                    homeTeamLogo: match.homeTeamLogo,
+                    awayTeam: match.awayTeam,
+                    awayTeamLogo: match.awayTeamLogo,
+                  ),
+                ),
               ],
             );
           } else if (state is MatchesError) {
