@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../../core/networking/api_service.dart';
@@ -17,6 +18,62 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
   @override
   Future<List<StandingModel>> getStandings() async {
     final prefs = await SharedPreferences.getInstance();
+    const cacheKey = 'standings_233_2025';
+
+    try {
+      // 🌐 ALWAYS try API first
+      final response = await apiService.get(
+        '/standings',
+        queryParameters: {
+          'league': '233',
+          'season': '2025',
+        },
+      );
+
+      final standings =
+          (response.data['response'][0]['league']['standings'][0] as List)
+              .map((data) => StandingModel.fromJson(data))
+              .toList();
+
+      // 💾 Cache fresh data
+      await prefs.setString(
+        cacheKey,
+        jsonEncode(standings.map((e) => e.toJson()).toList()),
+      );
+
+      print('API success → data cached');
+      return standings;
+    }
+
+    // 🚫 Handle Dio errors
+    on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+
+      // ⚠️ API limit reached
+      if (statusCode == 429) {
+        print('⚠️ DAILY API LIMIT REACHED');
+      }
+
+      // 🌙 Offline or any API failure → fallback to cache
+      final cachedData = prefs.getString(cacheKey);
+
+      if (cachedData != null) {
+        print('Using cached data due to API failure');
+
+        final List decoded = jsonDecode(cachedData);
+        return decoded.map((data) => StandingModel.fromJson(data)).toList();
+      }
+
+      // ❌ No cache at all
+      rethrow;
+    }
+  }
+}
+
+/*
+  @override
+  Future<List<StandingModel>> getStandings() async {
+    final prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString('standings');
 
     if (cachedData != null) {
@@ -30,7 +87,7 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
       try {
         final response = await apiService.get('/standings', queryParameters: {
           'league': "233",
-          'season': '2023',
+          'season': '2025',
         });
         print(response.data); // Debugging line
 
@@ -52,3 +109,4 @@ class StandingDataSourceImpl implements StandingRemoteDataSource {
     }
   }
 }
+*/
